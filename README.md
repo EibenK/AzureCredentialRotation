@@ -1,2 +1,2 @@
-# AzureCredentialRotation
-Azure Credential Rotation is a Python-based solution that automates the process of rotating credentials, such as service principal secrets or managed identities, in Azure. It ensures secure access management by regularly updating credentials, reducing the risk of unauthorized access while minimizing manual intervention.
+# Azure Activity Tracker
+Azure Activity Tracker is a Python-based solution that automates the monitoring and logging of activities within Azure, such as resource changes and access events. It provides real-time insights, enhances security by tracking critical actions, and minimizes manual effort in auditing and compliance reporting.
