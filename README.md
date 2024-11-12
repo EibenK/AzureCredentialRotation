@@ -13,4 +13,7 @@ Azure Credential Rotation is a Python-based solution that automates the process 
 
 
 ## Future Additions
-For future additions, we could add logging for recovery or critical events during the rotation process.
+- Secret Rotation Integration
+- Key Backup and recovery (SQL database)
+- Key Access Management (IAM - Multiple/least priviledge users)
+- Audit Trail and Reporting
