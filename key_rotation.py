@@ -10,8 +10,8 @@ logging.basicConfig(
 )
 
 # Azure Key Vault details
-KEY_VAULT_NAME = "<<Key Vault Name Goes Here>>"
-KEY_NAME = "<<Key Name Goes Here>>"
+KEY_VAULT_NAME = ""
+KEY_NAME = ""
 
 
 # Function to run Azure CLI commands and capture detailed output
@@ -93,6 +93,18 @@ def purge_deleted_key():
     run_azure_cli_command(command)
 
 
+# Function to disable the current key
+def disable_key():
+    command = [
+        "az", "keyvault", "key", "set-attributes",
+        "--vault-name", KEY_VAULT_NAME,
+        "--name", KEY_NAME,
+        "--enabled", "false"  # Disable the key
+    ]
+    logging.info(f"Disabling the current key '{KEY_NAME}' in Key Vault.")
+    run_azure_cli_command(command)
+
+
 # Function to create a new key
 def create_key():
     command = [
@@ -110,14 +122,19 @@ def create_key():
         logging.error(f"Failed to create new key '{KEY_NAME}'.")
 
 
-# Main function to check, purge and create key
+# Main function to check, purge, disable and create key
 def manage_key():
     # Step 1: Check if the key is in a deleted but recoverable state
     if check_key_deleted():
         # Step 2: If the key is in deleted state, purge it
         purge_deleted_key()
 
-    # Step 3: Create a new key
+    # Step 3: Check if the key exists before disabling it
+    if check_key_exists():
+        # Step 4: Disable the current key before creating a new one
+        disable_key()
+
+    # Step 5: Create a new key
     create_key()
 
 
